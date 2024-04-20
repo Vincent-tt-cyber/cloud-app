@@ -3,6 +3,7 @@ const router = express.Router();
 
 const authController = require("../controllers/authController");
 const { check } = require("express-validator");
+const authMiddleware = require("../middleware/auth.middleware");
 
 router.post(
   "/register",
@@ -17,5 +18,6 @@ router.post(
 );
 router.post("/login", authController.login);
 router.get("/users", authController.getAllUsers);
+router.get("/auth", authMiddleware, authController.getMe);
 
 module.exports = router;

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/slices/userSlice";
 import { login } from "../../actions/user";
 const Login = () => {
-  const [email, setEmail] = React.useState("");
+  const [email, setEmail] = React.useState("evgeniy161102@gmail.com");
   const [password, setPassword] = React.useState("");
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ const Login = () => {
     }
   };
 
-  React.useEffect(() => {}, []);
+  // React.useEffect(() => {}, []);
 
   return (
     <>

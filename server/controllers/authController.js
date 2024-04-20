@@ -86,6 +86,30 @@ module.exports.login = async (req, res) => {
   }
 };
 
+module.exports.getMe = async (req, res) => {
+  console.log("getMe req.user => ", req.user);
+  try {
+    const user = await pool.query("SELECT * FROM users WHERE id = ?", [
+      req.user.id,
+    ]);
+
+    console.log("getMe user.id => ", user.id);
+
+    if (user.length === 0) {
+      return res.status(404).json({ message: "Пользователь не найден." });
+    }
+    const token = jwt.sign({ id: user.id }, jwtSecret, { expiresIn: "1h" });
+    return res.json({
+      token,
+      user,
+    });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ message: "Не удалось получить данные пользователя." });
+  }
+};
+
 // Пользователи
 module.exports.getAllUsers = async (req, res) => {
   const [result] = await pool.query("SELECT * FROM users");
