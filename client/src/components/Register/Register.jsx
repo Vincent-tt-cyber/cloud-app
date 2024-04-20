@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "../Input/Input";
 import styles from "./Register.module.scss";
+import { register } from "../../actions/user";
 
 const Register = () => {
   const [fullName, setFullName] = React.useState("");
@@ -30,7 +31,9 @@ const Register = () => {
             type="password"
             placeholder="Пароль"
           />
-          <button>Зарегистрироваться</button>
+          <button onClick={() => register(fullName, email, password)}>
+            Зарегистрироваться
+          </button>
         </div>
       </div>
     </div>
